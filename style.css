@@ -1,1 +1,198 @@
-body { background: #111; color: #fff; font-family: sans-serif; text-align: center; padding: 40px; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+<script>
+  function openBooking() {
+    document.getElementById("bookingModal").style.display = "block";
+  }
+
+  function closeBooking() {
+    document.getElementById("bookingModal").style.display = "none";
+  }
+
+  // Schließe das Modal, wenn man außerhalb klickt
+  window.onclick = function(event) {
+    const modal = document.getElementById("bookingModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+</script>
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #e5e5e7;
+  background-color: #1c1c1e;
+}
+
+header {
+  background: #121212;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #bbb;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #0a84ff;
+}
+
+section {
+  padding: 120px 40px 60px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#hero {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 200px 20px 100px 20px;
+}
+
+#hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+footer {
+  background: #121212;
+  color: #888;
+  text-align: center;
+  padding: 30px;
+}
+
+.audioplayer {
+  margin: 20px 0;
+}
+
+audio {
+  width: 100%;
+  outline: none;
+  background-color: #2c2c2e;
+  border-radius: 8px;
+  padding: 8px;
+}
+.btn-booking {
+  background-color: #0a84ff;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-booking:hover {
+  background-color: #006ce1;
+}
+
+#cta {
+  text-align: center;
+  background-color: #2c2c2e;
+  padding: 80px 20px;
+}
+
+.btn-cta {
+  display: inline-block;
+  background-color: #0a84ff;
+  color: white;
+  padding: 14px 24px;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.btn-cta:hover {
+  background-color: #006ce1;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background-color: #1c1c1e;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  color: #fff;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  background: #2c2c2e;
+  color: #fff;
+}
+
+.modal-content button {
+  background-color: #0a84ff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #006ce1;
+}
