@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tonstudio KlangReich</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #333;
+            --text-light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/800") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding-top: 70px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: #fff;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: url("/api/placeholder/600/400") center/cover no-repeat;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--light-color);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-image {
+            height: 200px;
+            background: url("/api/placeholder/400/200") center/cover no-repeat;
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Equipment Section */
+        .equipment {
+            background-color: #fff;
+        }
+        
+        .equipment-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .equipment-item {
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .equipment-item h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .equipment-item i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        /* Prices Section */
+        .prices {
+            background-color: var(--light-color);
+        }
+        
+        .price-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .price-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .price-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .price-header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1.5rem;
+        }
+        
+        .price-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .price-features {
+            padding: 1.5rem;
+            list-style: none;
+        }
+        
+        .price-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background-color: #fff;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            background: url("/api/placeholder/400/250") center/cover no-repeat;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light-color);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links li {
+            margin: 0 15px;
+        }
+        
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+        }
+        
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Tonstudio <span>KlangReich</span></a>
+                <ul class="nav-links">
+                    <li><a href="#about">Über Uns</a></li>
+                    <li><a href="#services">Dienstleistungen</a></li>
+                    <li><a href="#equipment">Ausstattung</a></li>
+                    <li><a href="#prices">Preise</a></li>
+                    <li><a href="#gallery">Galerie</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Willkommen im Tonstudio KlangReich</h1>
+                <p>Professionelle Tonaufnahmen, Mixing und Mastering für Künstler und Bands in Münster</p>
+                <a href="#contact" class="btn">Termin vereinbaren</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Über Uns</h2>
+            <p class="section-subtitle">Wir sind ein professionelles Tonstudio im Herzen von Münster mit über 15 Jahren Erfahrung in der Musikproduktion.</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Tonstudio KlangReich bietet Dir den perfekten Raum, um Deine musikalischen Ideen umzusetzen. Unser Studio verfügt über modernste Technik und eine angenehme Atmosphäre, die Kreativität fördert.</p>
+                    <p>Mit jahrelanger Erfahrung in der Musikproduktion unterstützen wir Künstler dabei, ihre musikalische Vision zum Leben zu erwecken. Ob Soloaufnahmen, Bandproduktionen oder komplette Alben - bei uns bist Du in guten Händen.</p>
+                    <p>Unser Team besteht aus leidenschaftlichen Musikern und Toningenieuren, die ihr Handwerk verstehen und mit Begeisterung bei der Sache sind.</p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Unsere Dienstleistungen</h2>
+            <p class="section-subtitle">Von der Aufnahme über das Mixing bis zum finalen Mastering bieten wir alles, was für eine professionelle Produktion notwendig ist.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image"></div>
+                    <div class="service-content">
+                        <h3>Aufnahmen</h3>
+                        <p>Hochwertige Aufnahmen von Gesang, Instrumenten und ganzen Bands in unseren akustisch optimierten Räumen.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image"></div>
+                    <div class="service-content">
+                        <h3>Mixing</h3>
+                        <p>Professionelles Abmischen Deiner Tracks mit modernster Technik und erfahrenen Ohren für den perfekten Sound.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image"></div>
+                    <div class="service-content">
+                        <h3>Mastering</h3>
+                        <p>Der letzte Schliff für Deine Produktion, damit sie auf allen Abspielgeräten optimal klingt.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image"></div>
+                    <div class="service-content">
+                        <h3>Produktion</h3>
+                        <p>Wir unterstützen Dich bei der Entwicklung Deiner Songs von der Idee bis zum fertigen Produkt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Section -->
+    <section id="equipment" class="equipment">
+        <div class="container">
+            <h2 class="section-title">Unsere Ausstattung</h2>
+            <p class="section-subtitle">Wir arbeiten mit hochwertiger Technik, um optimale Ergebnisse zu erzielen.</p>
+            <div class="equipment-list">
+                <div class="equipment-item">
+                    <h3><i class="fas fa-microphone"></i> Mikrofone</h3>
+                    <ul>
+                        <li>Neumann U87</li>
+                        <li>AKG C414</li>
+                        <li>Shure SM7B</li>
+                        <li>DPA 4011</li>
+                        <li>Rode NT1000</li>
+                    </ul>
+                </div>
+                <div class="equipment-item">
+                    <h3><i class="fas fa-sliders-h"></i> Preamps & Interfaces</h3>
+                    <ul>
+                        <li>Universal Audio Apollo</li>
+                        <li>Audient ASP800</li>
+                        <li>Focusrite Scarlett 18i20</li>
+                        <li>Neve 1073 Pre</li>
+                    </ul>
+                </div>
+                <div class="equipment-item">
+                    <h3><i class="fas fa-headphones"></i> Abhöre</h3>
+                    <ul>
+                        <li>Adam A7X</li>
+                        <li>Yamaha HS8</li>
+                        <li>Beyerdynamic DT-770 Pro</li>
+                        <li>AKG K702</li>
+                    </ul>
+                </div>
+                <div class="equipment-item">
+                    <h3><i class="fas fa-laptop"></i> Software</h3>
+                    <ul>
+                        <li>Pro Tools</li>
+                        <li>Logic Pro X</li>
+                        <li>Ableton Live</li>
+                        <li>Waves Plugins</li>
+                        <li>Universal Audio Plugins</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Section -->
+    <section id="prices" class="prices">
+        <div class="container">
+            <h2 class="section-title">Unsere Preise</h2>
+            <p class="section-subtitle">Transparente Preise für professionelle Ergebnisse. Kontaktiere uns für ein individuelles Angebot.</p>
+            <div class="price-cards">
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Basis Paket</h3>
+                        <div class="price">45€/h</div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Aufnahme von Gesang/Instrument</li>
+                        <li>Basic Mixing</li>
+                        <li>1 Korrekturschleife</li>
+                        <li>1 finaler Mix</li>
+                        <li>Digitale Dateien</li>
+                    </ul>
+                </div>
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Band Paket</h3>
+                        <div class="price">60€/h</div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Aufnahme einer kompletten Band</li>
+                        <li>Professionelles Mixing</li>
+                        <li>2 Korrekturschleifen</li>
+                        <li>Mastering</li>
+                        <li>Digitale Dateien</li>
+                    </ul>
+                </div>
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Premium Paket</h3>
+                        <div class="price">Auf Anfrage</div>
+                    </div>
+                    <ul class="price-features">
+                        <li>Vollständige Produktion</li>
+                        <li>Premium Mixing & Mastering</li>
+                        <li>Unbegrenzte Korrekturschleifen</li>
+                        <li>Arrangement-Hilfe</li>
+                        <li>Musikerbereitstellung möglich</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Unsere Galerie</h2>
+            <p class="section-subtitle">Einblicke in unser Studio und vergangene Produktionen.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Kontakt</h2>
+            <p class="section-subtitle">Hast Du Fragen oder möchtest einen Termin vereinbaren? Kontaktiere uns!</p>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Kontaktinformationen</h3>
+                    <ul class="contact-details">
+                        <li><i class="fas fa-map-marker-alt"></i> Münsterstraße 123, 48149 Münster</li>
+                        <li><i class="fas fa-phone"></i> +49 251 123456789</li>
+                        <li><i class="fas fa-envelope"></i> info@tonstudio-klangreich.de</li>
+                        <li><i class="fas fa-clock"></i> Mo-Fr: 10:00 - 20:00 Uhr, Sa: nach Vereinbarung</li>
+                    </ul>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Betreff</label>
+                            <input type="text" id="subject" name="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nachricht</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Tonstudio KlangReich</h3>
+                <p>Dein Partner für professionelle Musikproduktionen in Münster</p>
+            </div>
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fab fa-soundcloud"></i></a></li>
+            </ul>
+            <div class="copyright">
+                <p>&copy; 2025 Tonstudio KlangReich. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
