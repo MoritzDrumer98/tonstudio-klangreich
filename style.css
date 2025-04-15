@@ -3,23 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-<script>
-  function openBooking() {
-    document.getElementById("bookingModal").style.display = "block";
-  }
-
-  function closeBooking() {
-    document.getElementById("bookingModal").style.display = "none";
-  }
-
-  // Schließe das Modal, wenn man außerhalb klickt
-  window.onclick = function(event) {
-    const modal = document.getElementById("bookingModal");
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
-</script>
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
